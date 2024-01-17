@@ -1,0 +1,13 @@
+{
+  "name": "Winter2024-SDEV328-Application",
+  "description": "Job application site for a software development job",
+  "authors": [
+    {
+      "name": "Zalman I.",
+      "email": "syntaxwarden@protonmail.com"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
