@@ -56,7 +56,23 @@
     });
 
     // define a prior experience route
-    $f3->route("GET|POST /application-experience", function() {
+    $f3->route("GET|POST /application-experience", function($f3) {
+        // jf prior experience was submitted
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // grab the given data
+            $biography = $_POST["biography"];
+            $yearsExperience = $_POST["years-experience"];
+            $willingToRelocate = $_POST["willing-to-relocate"];
+
+            // save data to session
+            $f3->set("SESSION.biography", $biography);
+            $f3->set("SESSION.years-experience", $yearsExperience);
+            $f3->set("SESSION.willing-to-relocate", $willingToRelocate);
+
+            // send user over to next application page
+            $f3->reroute("application-mailing-lists");
+        }
+
         // create a new view object
         $view = new Template();
 
