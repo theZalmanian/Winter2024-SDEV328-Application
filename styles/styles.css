@@ -6,9 +6,10 @@
     --secondary-color-variant: #3D8B97; /* blue munsell */
 
     --accent-color: #56A3A9; /* moonstone */
-}
 
-/* bootstrap overloads */
+    /* bootstrap overloads */
+    --bs-border-color: #333333;
+}
 
 .btn.btn-success {
     background-color: var(--secondary-color-variant);
@@ -37,4 +38,21 @@ main {
 .nav-header {
     text-decoration: none;
     margin-bottom: 0;
+}
+
+/* forms */
+
+/* summary */
+
+#summary-data > p
+, #applicant-bio > p {
+    margin-bottom: 0;
+}
+
+#summary-data > hr {
+    margin: .5rem 0;
+}
+
+#summary-person-icon {
+    width: 18rem;
 }
