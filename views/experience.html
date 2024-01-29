@@ -26,7 +26,58 @@
     </nav>
 </header>
 <main class="p-4">
+    <h1>Experience</h1>
+    <hr>
 
+    <form method="post" action="#">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <label for="biography">
+                    <strong>Biography</strong>
+                </label>
+                <textarea class="w-100" id="biography" name="biography" rows="8"></textarea>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="portfolio-link">
+                            <strong>Portfolio Link</strong>
+                        </label>
+                        <br>
+                        <input class="w-100" type="text" id="portfolio-link" name="portfolio-link"
+                               placeholder="reality.com/username">
+                    </div>
+                    <div class="col-12">
+                        <p class="m-0">
+                            <strong>Years Experience</strong>
+                        </p>
+                        <input type="radio" id="below-three" name="years-experience" value="below-three" checked>
+                        <label for="below-three">0-3</label>
+                        <input type="radio" id="below-five" name="years-experience" value="below-five">
+                        <label for="below-five">3-5</label>
+                        <input type="radio" id="above-five" name="years-experience" value="above-five">
+                        <label for="above-five">5+</label>
+                    </div>
+                    <div class="col-12">
+                        <p class="m-0">
+                            <strong>Willing To Relocate</strong>
+                        </p>
+                        <input type="radio" id="yes" name="willing-to-relocate" value="yes" checked>
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="no" name="willing-to-relocate" value="no">
+                        <label for="no">No</label>
+                        <input type="radio" id="maybe" name="willing-to-relocate" value="maybe">
+                        <label for="maybe">Maybe</label>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-success w-100" type="submit">
+                            <strong>Next ></strong>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </main>
 <footer class="p-4">
 </footer>
