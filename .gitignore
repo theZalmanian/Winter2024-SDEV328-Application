@@ -1,2 +1,4 @@
 composer.lock
+error_log
 vendor/
+tmp/
