@@ -33,7 +33,7 @@
     });
 
     // define a prior experience route
-    $f3->route("GET /application-experience", function() {
+    $f3->route("GET|POST /application-experience", function() {
         // create a new view object
         $view = new Template();
 
