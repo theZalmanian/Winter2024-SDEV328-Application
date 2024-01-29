@@ -8,13 +8,7 @@
     --accent-color: #56A3A9; /* moonstone */
 }
 
-body, header, footer {
-    background-color: var(--primary-color);
-}
-
-main {
-    background-color: var(--primary-color-variant);
-}
+/* bootstrap overloads */
 
 .btn.btn-success {
     background-color: var(--secondary-color-variant);
@@ -24,6 +18,23 @@ main {
     background-color: var(--secondary-color);
 }
 
+/* general styles */
+
+body, header, footer {
+    background-color: var(--primary-color);
+}
+
+main {
+    background-color: var(--primary-color-variant);
+}
+
 #home-banner, .btn {
     box-shadow: 0 0 4px 2px var(--secondary-color);
+}
+
+/* navigation */
+
+.nav-header {
+    text-decoration: none;
+    margin-bottom: 0;
 }
