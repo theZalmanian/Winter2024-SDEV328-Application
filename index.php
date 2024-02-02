@@ -6,11 +6,12 @@
      * https://thezalmanian.greenriverdev.com/328/Winter2024-SDEV328-Application/
      */
 
+    // display errors (when needed)
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
     // require Fat-Free Framework autoload file
     require_once("vendor/autoload.php");
-
-    // start up session
-    new Session();
 
     // instantiate Fat-Free Framework (f3) class
     $f3 = Base::instance();
@@ -43,6 +44,8 @@
             $f3->set("SESSION.email", $email);
             $f3->set("SESSION.state", $state);
             $f3->set("SESSION.phone", $phone);
+
+            var_dump($f3->get("SESSION"));
 
             // send user over to next application page
             $f3->reroute("application-experience");
@@ -81,7 +84,12 @@
     });
 
     // define a mailing list subscription route
-    $f3->route("GET /application-mailing-lists", function() {
+    $f3->route("GET|POST /application-mailing-lists", function($f3) {
+        // jf prior experience was submitted
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $f3->reroute("application-summary");
+        }
+
         // create a new view object
         $view = new Template();
 
