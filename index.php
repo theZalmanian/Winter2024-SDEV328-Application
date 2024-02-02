@@ -39,13 +39,11 @@
             $phone = $_POST["phone"];
 
             // save data to session
-            $f3->set("SESSION.first-name", $firstName);
-            $f3->set("SESSION.last-name", $lastName);
+            $f3->set("SESSION.firstName", $firstName);
+            $f3->set("SESSION.lastName", $lastName);
             $f3->set("SESSION.email", $email);
             $f3->set("SESSION.state", $state);
             $f3->set("SESSION.phone", $phone);
-
-            var_dump($f3->get("SESSION"));
 
             // send user over to next application page
             $f3->reroute("application-experience");
@@ -64,13 +62,15 @@
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             // grab the given data
             $biography = $_POST["biography"];
+            $portfolioLink = $_POST["portfolio-link"];
             $yearsExperience = $_POST["years-experience"];
             $willingToRelocate = $_POST["willing-to-relocate"];
 
             // save data to session
             $f3->set("SESSION.biography", $biography);
-            $f3->set("SESSION.years-experience", $yearsExperience);
-            $f3->set("SESSION.willing-to-relocate", $willingToRelocate);
+            $f3->set("SESSION.portfolioLink", $portfolioLink);
+            $f3->set("SESSION.yearsExperience", $yearsExperience);
+            $f3->set("SESSION.willingToRelocate", $willingToRelocate);
 
             // send user over to next application page
             $f3->reroute("application-mailing-lists");

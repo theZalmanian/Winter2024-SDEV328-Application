@@ -29,7 +29,8 @@
     <div class="row">
         <div class="col-12 col-md-6 p-3">
             <div class="border border-2 rounded p-3" id="summary-data">
-                <p>Name: {{ @SESSION.first-name }} {{ @SESSION.last-name }}</p>
+
+                <p>Name: {{ @SESSION.firstName }} {{ @SESSION.lastName }}</p>
                 <hr>
                 <p>Email: {{ @SESSION.email }}</p>
                 <hr>
@@ -37,9 +38,11 @@
                 <hr>
                 <p>Phone: {{ @SESSION.phone }}</p>
                 <hr>
-                <p>Portfolio Link: </p>
+                <p>Portfolio Link: {{ @SESSION.portfolioLink }}</p>
                 <hr>
-                <p>Willing To Relocate: </p>
+                <p>Experience: {{ @SESSION.yearsExperience }}</p>
+                <hr>
+                <p>Willing To Relocate: {{ @SESSION.willingToRelocate }}</p>
                 <hr>
                 <p>Mailing Lists: </p>
             </div>
@@ -76,7 +79,7 @@
         <div class="col-12 col-md-6 p-3" id="applicant-bio">
             <h4>Summary</h4>
             <p>
-
+                {{ @SESSION.biography }}
             </p>
         </div>
     </div>
