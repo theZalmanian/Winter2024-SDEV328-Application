@@ -87,6 +87,19 @@
     $f3->route("GET|POST /application-mailing-lists", function($f3) {
         // jf prior experience was submitted
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // create storage array
+            $mailingLists = [];
+
+            // run through the post array
+            foreach ($_POST as $currCheckbox) {
+                // add the current checkbox to storage array
+                $mailingLists[] = $currCheckbox;
+            }
+
+            // save data to session
+            $f3->set("SESSION.mailingLists", $mailingLists);
+
+            // send user over to application summary page
             $f3->reroute("application-summary");
         }
 
