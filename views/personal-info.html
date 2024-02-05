@@ -36,13 +36,13 @@
                     <div class="col-6">
                         <label for="first-name">First Name</label>
                         <br>
-                        <input class="w-100" type="text" id="first-name" name="first-name"
+                        <input class="form-control w-100" type="text" id="first-name" name="first-name"
                                placeholder="Horace">
                     </div>
                     <div class="col-6">
                         <label for="last-name">Last Name</label>
                         <br>
-                        <input class="w-100" type="text" id="last-name" name="last-name"
+                        <input class="form-control w-100" type="text" id="last-name" name="last-name"
                                placeholder="Press">
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     <div class="col-12">
                         <label for="email">Email</label>
                         <br>
-                        <input class="w-100" type="email" id="email" name="email"
+                        <input class="form-control w-100" type="email" id="email" name="email"
                                placeholder="hp123@mail.com">
                     </div>
                 </div>
@@ -58,13 +58,73 @@
                     <div class="col-6">
                         <label for="state">State</label>
                         <br>
-                        <input class="w-100" type="text" id="state" name="state"
-                               placeholder="Washington">
+                        <div id="select-container">
+                            <select class="form-control w-100" id="state" name="state">
+                                <option value="Alabama">Alabama</option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticut">Connecticut</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="District Of Columbia">District Of Columbia</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Minnesota">Minnesota</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Montana">Montana</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="New York">New York</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakota">North Dakota</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Rhode Island">Rhode Island</option>
+                                <option value="South Carolina">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Washington" selected>Washington</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="Wyoming">Wyoming</option>
+                            </select>
+                            <span id="dropdown-icon">
+                                <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 36.678 36.678" xml:space="preserve">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g>
+                                    <path d="M29.694,20.074c0.087,0.16,0.08,0.356-0.02,0.512L19.393,36.449c-0.089,0.139-0.241,0.224-0.406,0.229 c-0.004,0-0.009,0-0.014,0c-0.159,0-0.31-0.074-0.403-0.206L6.997,20.609c-0.111-0.152-0.127-0.354-0.042-0.521 s0.258-0.273,0.446-0.273h21.855C29.439,19.814,29.608,19.914,29.694,20.074z M7.401,16.864h21.855c0.007,0,0.013,0,0.02,0 c0.276,0,0.5-0.224,0.5-0.5c0-0.156-0.069-0.295-0.184-0.387L18.086,0.205C17.989,0.073,17.838,0.009,17.669,0 c-0.165,0.005-0.315,0.09-0.406,0.228L6.982,16.092c-0.101,0.154-0.107,0.35-0.021,0.511C7.05,16.764,7.218,16.864,7.401,16.864z">
+                                    </path> </g> </g>
+                                </svg>
+                            </span>
+                        </div>
                     </div>
                     <div class="col-6">
                         <label for="phone">Phone</label>
                         <br>
-                        <input class="w-100" type="tel" id="phone" name="phone"
+                        <input class="w-100 form-control" type="tel" id="phone" name="phone"
                                placeholder="123-456-7890">
                     </div>
                 </div>
