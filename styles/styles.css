@@ -5,6 +5,8 @@
     --secondary-color: #1F4F6F; /* indigo dye */
     --secondary-color-variant: #3D8B97; /* blue munsell */
 
+    --third-color: #C7B8B6;
+
     --accent-color: #56A3A9; /* moonstone */
 
     /* bootstrap overloads */
@@ -33,6 +35,10 @@ main {
     box-shadow: 0 0 4px 2px var(--secondary-color);
 }
 
+.bg-primary-color {
+    background-color: var(--primary-color);
+}
+
 /* navigation */
 
 .nav-header {
@@ -42,6 +48,66 @@ main {
 
 /* forms */
 
+label {
+    margin-bottom: .25em;
+}
+
+.form-control, textarea {
+    padding: .25em .6em;
+    border-radius: .25em;
+}
+
+input[type=checkbox]
+, input[type=radio] {
+    transform: scale(1);
+    accent-color: var(--accent-color);
+}
+
+input[type=checkbox]:hover
+, input[type=radio]:hover {
+    accent-color: var(--secondary-color);
+}
+
+/* personal info */
+
+#select-container {
+    position: relative;
+}
+
+#dropdown-icon {
+    width: 10px;
+    position: absolute;
+    top: 2px;
+    left: 95%;
+}
+
+#personal-info > .row
+, #personal-info > .row .row {
+    --bs-gutter-x: .75em;
+}
+
+/* prior experience */
+
+textarea {
+    resize: none;
+}
+
+.radio-group label {
+    margin-right: .75em;
+}
+
+/* mailing lists*/
+
+#mailing-lists label {
+    margin-left: .25em;
+}
+
+/* summary */
+
+#summary-data {
+    border-radius: .25em;
+}
+
 /* summary */
 
 #summary-data > p
@@ -50,7 +116,7 @@ main {
 }
 
 #summary-data > hr {
-    margin: .5rem 0;
+    margin: .25em 0;
 }
 
 #summary-person-icon {
