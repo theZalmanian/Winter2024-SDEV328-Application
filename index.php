@@ -45,13 +45,22 @@
                 $f3->set("errors['firstName']", "must be one word containing only letters.");
             }
 
-            $lastName = $_POST["last-name"];
+            // if the given last name if valid
+            if(validName($_POST["last-name"])) {
+                // store it within session
+                $f3->set("SESSION.lastName", $_POST["last-name"]);
+            }
+
+            // otherwise set error to be displayed
+            else {
+                $f3->set("errors['lastName']", "must be one word containing only letters.");
+            }
+
             $email = $_POST["email"];
             $state = $_POST["state"];
             $phone = $_POST["phone"];
 
             // save data to session
-            $f3->set("SESSION.lastName", $lastName);
             $f3->set("SESSION.email", $email);
             $f3->set("SESSION.state", $state);
             $f3->set("SESSION.phone", $phone);

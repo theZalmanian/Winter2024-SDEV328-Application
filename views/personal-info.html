@@ -52,7 +52,12 @@
                     <div class="col-6">
                         <label for="last-name">
                             <strong>Last Name</strong>
-                            <span class="required">*</span>
+                            <span class="required">
+                                <check if="{{ isset(@errors['lastName']) }}">
+                                    <true>{{ @errors['lastName'] }}</true>
+                                    <false>*</false>
+                                </check>
+                            </span>
                         </label>
                         <br>
                         <input class="form-control w-100" type="text" id="last-name" name="last-name"
