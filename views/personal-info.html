@@ -38,14 +38,12 @@
                     <div class="col-6">
                         <label for="first-name">
                             <strong>First Name</strong>
-                            <check if="{{ isset(@errors['firstName']) }}">
-                                <true>
-                                    <span class="required">{{ @errors['firstName'] }}</span>
-                                </true>
-                                <false>
-                                    <span class="required">*</span>
-                                </false>
-                            </check>
+                            <span class="required">
+                                <check if="{{ isset(@errors['firstName']) }}">
+                                    <true>{{ @errors['firstName'] }}</true>
+                                    <false>*</false>
+                                </check>
+                            </span>
                         </label>
                         <br>
                         <input class="form-control w-100" type="text" id="first-name" name="first-name"
