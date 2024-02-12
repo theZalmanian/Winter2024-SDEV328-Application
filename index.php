@@ -34,22 +34,33 @@
     $f3->route("GET|POST /application-personal-info", function($f3) {
         // jf personal information was submitted
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // grab the given data
-            $firstName = $_POST["first-name"];
+            // if the given first name if valid
+            if(validName($_POST["first-name"])) {
+                // store it within session
+                $f3->set("SESSION.firstName", $_POST["first-name"]);
+            }
+
+            // otherwise set error to be displayed
+            else {
+                $f3->set("errors['firstName']", "must be one word containing only letters.");
+            }
+
             $lastName = $_POST["last-name"];
             $email = $_POST["email"];
             $state = $_POST["state"];
             $phone = $_POST["phone"];
 
             // save data to session
-            $f3->set("SESSION.firstName", $firstName);
             $f3->set("SESSION.lastName", $lastName);
             $f3->set("SESSION.email", $email);
             $f3->set("SESSION.state", $state);
             $f3->set("SESSION.phone", $phone);
 
-            // send user over to next application page
-            $f3->reroute("application-experience");
+            // If there are no errors
+            if (empty($f3->get('errors'))) {
+                // send user over to next application page
+                $f3->reroute("application-experience");
+            }
         }
 
         // create a new view object
