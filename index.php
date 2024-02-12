@@ -13,6 +13,9 @@
     // require Fat-Free Framework autoload file
     require_once("vendor/autoload.php");
 
+    // access validation methods
+    require_once ("model/validate.php");
+
     // instantiate Fat-Free Framework (f3) class
     $f3 = Base::instance();
 
