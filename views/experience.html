@@ -37,7 +37,7 @@
                 <label for="biography">
                     <strong>Biography</strong>
                 </label>
-                <textarea class="form-control w-100" id="biography" name="biography" rows="9" required></textarea>
+                <textarea class="form-control w-100" id="biography" name="biography" rows="9"></textarea>
             </div>
             <div class="col-12 col-md-4 mb-2">
                 <div class="row">
@@ -47,14 +47,15 @@
                         </label>
                         <br>
                         <input class="form-control w-100" type="text" id="portfolio-link" name="portfolio-link"
-                               placeholder="realtech.net/username" required>
+                               placeholder="realtech.net/username">
                     </div>
                     <div class="col-12 mb-3">
                         <p class="m-0">
                             <strong>Years Experience</strong>
+                            <span class="required">*</span>
                         </p>
                         <div class="radio-group">
-                            <input type="radio" id="below-two" name="years-experience" value="0-2" checked required>
+                            <input type="radio" id="below-two" name="years-experience" value="0-2" required>
                             <label for="below-two">0-2</label>
                             <input type="radio" id="below-four" name="years-experience" value="2-4">
                             <label for="below-four">2-4</label>
@@ -67,7 +68,7 @@
                             <strong>Willing To Relocate</strong>
                         </p>
                         <div class="radio-group">
-                            <input type="radio" id="yes" name="willing-to-relocate" value="Yes" checked required>
+                            <input type="radio" id="yes" name="willing-to-relocate" value="Yes">
                             <label for="yes">Yes</label>
                             <input type="radio" id="no" name="willing-to-relocate" value="No">
                             <label for="no">No</label>

@@ -5,8 +5,6 @@
     --secondary-color: #1F4F6F; /* indigo dye */
     --secondary-color-variant: #3D8B97; /* blue munsell */
 
-    --third-color: #C7B8B6;
-
     --accent-color: #56A3A9; /* moonstone */
 
     /* bootstrap overloads */
@@ -50,6 +48,10 @@ main {
 
 label {
     margin-bottom: .25em;
+}
+
+.required {
+    color: gold;
 }
 
 .form-control, textarea {
@@ -96,7 +98,7 @@ textarea {
     margin-right: .75em;
 }
 
-/* mailing lists*/
+/* mailing lists */
 
 #mailing-lists label {
     margin-left: .25em;
@@ -107,8 +109,6 @@ textarea {
 #summary-data {
     border-radius: .25em;
 }
-
-/* summary */
 
 #summary-data > p
 , #applicant-bio > p {
