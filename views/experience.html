@@ -44,10 +44,15 @@
                     <div class="col-12 mb-3">
                         <label for="portfolio-link">
                             <strong>Portfolio Link</strong>
+                            <check if="{{ isset(@errors['portfolioLink']) }}">
+                                <true>
+                                    <span class="required">{{ @errors['portfolioLink'] }}</span>
+                                </true>
+                            </check>
                         </label>
                         <br>
                         <input class="form-control w-100" type="text" id="portfolio-link" name="portfolio-link"
-                               placeholder="realtech.net/username">
+                               placeholder="https://realtech.net/username">
                     </div>
                     <div class="col-12 mb-3">
                         <p class="m-0">

@@ -10,10 +10,12 @@
     }
 
     /**
-     * @return void
+     * Checks if the given link is valid, and returns true/false accordingly
+     * @param string $link The link being checked
+     * @return boolean True if the given link is valid; otherwise False
      */
-    function validGitHub() {
-
+    function validLink($link) {
+        return filter_var($link, FILTER_VALIDATE_URL);
     }
 
     /**

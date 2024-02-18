@@ -83,20 +83,31 @@
     $f3->route("GET|POST /application-experience", function($f3) {
         // jf prior experience was submitted
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // grab the given data
-            $biography = $_POST["biography"];
+            // if a portfolio was submitted
             $portfolioLink = $_POST["portfolio-link"];
-            $yearsExperience = $_POST["years-experience"];
-            $willingToRelocate = $_POST["willing-to-relocate"];
+            if(!empty($portfolioLink)) {
+                // if the given url vas valid
+                if(validLink($portfolioLink)) {
+                    // store it within session
+                    $f3->set("SESSION.portfolioLink", $portfolioLink);
+                }
 
-            // save data to session
-            $f3->set("SESSION.biography", $biography);
-            $f3->set("SESSION.portfolioLink", $portfolioLink);
-            $f3->set("SESSION.yearsExperience", $yearsExperience);
-            $f3->set("SESSION.willingToRelocate", $willingToRelocate);
+                // otherwise set error to be displayed
+                else {
+                    $f3->set("errors['portfolioLink']", "must be a valid url.");
+                }
+            }
 
-            // send user over to next application page
-            $f3->reroute("application-mailing-lists");
+            // grab the given data and save to session
+            $f3->set("SESSION.biography", $_POST["biography"]);
+            $f3->set("SESSION.yearsExperience", $_POST["years-experience"]);
+            $f3->set("SESSION.willingToRelocate", $_POST["willing-to-relocate"]);
+
+            // If there are no errors
+            if (empty($f3->get('errors'))) {
+                // send user over to next application page
+                $f3->reroute("application-mailing-lists");
+            }
         }
 
         // create a new view object
