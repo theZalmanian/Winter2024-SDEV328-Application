@@ -57,7 +57,12 @@
                     <div class="col-12 mb-3">
                         <p class="m-0">
                             <strong>Years Experience</strong>
-                            <span class="required">*</span>
+                            <span class="required">
+                                <check if="{{ isset(@errors['yearsExperience']) }}">
+                                    <true>{{ @errors['yearsExperience'] }}</true>
+                                    <false>*</false>
+                                </check>
+                            </span>
                         </p>
                         <div class="radio-group">
                             <input type="radio" id="below-two" name="years-experience" value="0-2" required>

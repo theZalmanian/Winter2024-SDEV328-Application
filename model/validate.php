@@ -19,10 +19,15 @@
     }
 
     /**
-     * @return void
+     * Checks if the given experience value is expected on form, and returns true/false accordingly
+     * @param string $experienceValue The value being checked
+     * @return boolean True if the given experience value is expected on form; otherwise False
      */
-    function validExperience() {
-
+    function validExperience($experienceValue)
+    {
+        return $experienceValue == "0-2"
+            || $experienceValue == "2-4"
+            || $experienceValue == "4+";
     }
 
     /**

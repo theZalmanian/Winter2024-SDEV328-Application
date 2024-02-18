@@ -98,9 +98,19 @@
                 }
             }
 
+            // if the given # of years experience was a valid radio value
+            if(validExperience($_POST["years-experience"])) {
+                // store it in session
+                $f3->set("SESSION.yearsExperience", $_POST["years-experience"]);
+            }
+
+            // otherwise, set error to be displayed
+            else {
+                $f3->set("errors['yearsExperience']", "must be a valid value from below.");
+            }
+
             // grab the given data and save to session
             $f3->set("SESSION.biography", $_POST["biography"]);
-            $f3->set("SESSION.yearsExperience", $_POST["years-experience"]);
             $f3->set("SESSION.willingToRelocate", $_POST["willing-to-relocate"]);
 
             // If there are no errors
