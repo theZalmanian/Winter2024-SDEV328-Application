@@ -29,7 +29,7 @@
 </header>
 <main class="p-4">
     <div class="row d-flex align-items-center">
-        <div class="col-md-6 p-3">
+        <div class="col-md-6">
             <div class="border border p-3" id="summary-data">
                 <p>Name: {{ @SESSION.firstName }} {{ @SESSION.lastName }}</p>
                 <hr>
@@ -39,26 +39,45 @@
                 <hr>
                 <p>Phone: {{ @SESSION.phone }}</p>
                 <hr>
-                <p>Portfolio Link: {{ @SESSION.portfolioLink }}</p>
+                <p>
+                    Portfolio Link:
+                    <check if="{{ isset(@SESSION.portfolioLink) }}">
+                        <true>{{ @SESSION.portfolioLink }}</true>
+                        <false>N/A</false>
+                    </check>
+                </p>
                 <hr>
                 <p>Experience: {{ @SESSION.yearsExperience }} years</p>
                 <hr>
-                <p>Willing To Relocate: {{ @SESSION.willingToRelocate }}</p>
+                <p>
+                    Willing To Relocate:
+                    <check if="{{ isset(@SESSION.willingToRelocate) }}">
+                        <true>{{ @SESSION.willingToRelocate }}</true>
+                        <false>N/A</false>
+                    </check>
+                </p>
                 <hr>
                 <p>
                     Mailing Lists:
-                    <repeat group="{{ @SESSION.mailingLists }}" value="{{ @mailingList }}" counter="{{ @index }}">
-                        <check if="{{ @index < count(@SESSION.mailingLists) }}">
-                            <true>{{ @mailingList }},</true>
-                            <false>{{ @mailingList }}</false>
-                        </check>
-                    </repeat>
+                    <check if="{{ isset(@SESSION.mailingLists) }}">
+                        <true>
+                            <repeat group="{{ @SESSION.mailingLists }}" value="{{ @mailingList }}" counter="{{ @index }}">
+                                <check if="{{ @index < count(@SESSION.mailingLists) }}">
+                                    <true>{{ @mailingList }},</true>
+                                    <false>{{ @mailingList }}</false>
+                                </check>
+                            </repeat>
+                        </true>
+                        <false>
+                            None Selected
+                        </false>
+                    </check>
                 </p>
             </div>
         </div>
         <div class="d-none d-md-block col-md-6 p-3">
             <div class="d-flex justify-content-center p-2">
-                <svg id="summary-person-icon" xmlns="http://www.w3.org/2000/svg" viewBox="-51.2 -51.2 614.40 614.40" xml:space="preserve" fill="#000000">
+                <svg id="summary-person-icon" xmlns="http://www.w3.org/2000/svg" viewBox="-51.2 -51.2 614.40 614.40" fill="#000000">
                     <g id="summary-head-background">
                         <path fill="#959e98" transform="translate(-51.2, -51.2), scale(38.4)" d="M9.166.33a2.25 2.25 0 00-2.332 0l-5.25 3.182A2.25 2.25 0 00.5 5.436v5.128a2.25 2.25 0 001.084 1.924l5.25 3.182a2.25 2.25 0 002.332 0l5.25-3.182a2.25 2.25 0 001.084-1.924V5.436a2.25 2.25 0 00-1.084-1.924L9.166.33z">
                         </path>
@@ -82,18 +101,20 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 col-md-6 p-3">
+    <check if="{{ isset(@SESSION.biography) }}">
+        <div class="row">
+            <div class="col-12 col-md-6 p-3 d-none d-md-block">
+            </div>
+            <div class="col-12 col-md-6 p-3" id="applicant-bio">
+                <h4>Summary</h4>
+                <p>
+                    {{ @SESSION.biography }}
+                </p>
+            </div>
         </div>
-        <div class="col-12 col-md-6 p-3" id="applicant-bio">
-            <h4>Summary</h4>
-            <p>
-                {{ @SESSION.biography }}
-            </p>
-        </div>
-    </div>
-    <div class="text-center mt-2">
-        <button class="btn btn-success w-50" type="submit">
+    </check>
+    <div class="row col-12 col-md-6 d-flex justify-content-center mt-3 mx-auto">
+        <button class="btn btn-success" type="submit">
             <strong>Submit My Application!</strong>
         </button>
     </div>
