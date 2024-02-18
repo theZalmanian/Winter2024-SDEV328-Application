@@ -16,6 +16,9 @@
     // access validation methods
     require_once("model/validate.php");
 
+    // access business data
+    require_once("model/data.php");
+
     // instantiate Fat-Free Framework (f3) class
     $f3 = Base::instance();
 

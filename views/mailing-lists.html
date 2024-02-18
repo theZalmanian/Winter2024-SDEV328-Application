@@ -12,20 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-<header class="p-4">
-    <nav>
-        <a class="h6 nav-header" href="/328/Winter2024-SDEV328-Application/">
-            Reality Redefined Industries
-        </a>
-        <div class="d-flex justify-content-between align-items-center my-2">
-            <a class="h4 nav-header" href="/328/Winter2024-SDEV328-Application/">
-                Reality Architect Internship
-            </a>
-        </div>
-        <p class="mb-0">
-            Greater Unknown, Outer Cosmos • Paid • 12 weeks
-        </p>
-    </nav>
+<header>
+    <include href="views/layouts/navigation.html"/>
 </header>
 <main class="p-4">
     <h1>Job Openings Mailing Lists</h1>
@@ -37,42 +25,21 @@
                 <strong>Reality Architecture Jobs</strong>
             </p>
             <div class="row col-11">
-                <div class="col-12 col-md-3">
-                    <input id="aurora-developer" name="aurora-developer"
-                           type="checkbox" value="AURORA Developer">
-                    <label for="aurora-developer">AURORA Developer</label>
-                    <br>
-                    <input id="quantum-sculptor" name="quantum-sculptor"
-                           type="checkbox" value="Quantum Sculptor">
-                    <label for="quantum-sculptor">Quantum Sculptor</label>
-                </div>
-                <div class="col-12 col-md-3">
-                    <input id="cognitive-reality-analyst" name="cognitive-reality-analyst"
-                           type="checkbox" value="Cognitive Reality Analyst">
-                    <label for="cognitive-reality-analyst">Cognitive Reality Analyst</label>
-                    <br>
-                    <input id="rift-technician" name="rift-technician"
-                           type="checkbox" value="Rift Technician">
-                    <label for="rift-technician">Rift Technician</label>
-                </div>
-                <div class="col-12 col-md-3">
-                    <input id="cosmic-curator" name="cosmic-curator"
-                           type="checkbox" value="Cosmic Curator">
-                    <label for="cosmic-curator">Cosmic Curator</label>
-                    <br>
-                    <input id="seismic-choreographer" name="seismic-choreographer"
-                           type="checkbox" value="Seismic Choreographer">
-                    <label for="seismic-choreographer">Seismic Choreographer</label>
-                </div>
-                <div class="col-12 col-md-3">
-                    <input id="perception-analyst" name="perception-analyst"
-                           type="checkbox" value="Perception Analyst">
-                    <label for="perception-analyst">Perception Analyst</label>
-                    <br>
-                    <input id="virtual-explorer" name="virtual-explorer"
-                           type="checkbox" value="Virtual Explorer">
-                    <label for="virtual-explorer">Virtual Explorer</label>
-                </div>
+                <div class="d-none">{{ @index = 1 }}</div>
+                <repeat group="{{ getJobMailingLists() }}" key="{{ @value }}" value="{{ @name }}">
+                    <check if="{{ @index % 2 != 0}}">
+                        <div class="col-12 col-md-3">
+                    </check>
+                    <div>
+                        <input id="{{ @value }}" name="{{ @value }}"
+                               type="checkbox" value="{{ @name }}">
+                        <label for="{{ @value }}">{{ @name }}</label>
+                    </div>
+                    <check if="{{ @index % 2 == 0 }}">
+                        </div>
+                    </check>
+                    <div class="d-none">{{ @index++ }}</div>
+                </repeat>
             </div>
             <p class="my-2">
                 <strong>Relativistic Verticals</strong>
