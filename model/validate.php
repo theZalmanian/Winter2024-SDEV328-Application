@@ -10,24 +10,12 @@
     }
 
     /**
-     * Checks if the given link is valid, and returns true/false accordingly
-     * @param string $link The link being checked
-     * @return boolean True if the given link is valid; otherwise False
+     * Checks if the given email address is valid, and returns true/false accordingly
+     * @param string $email The email address being checked
+     * @return boolean True if the given email address is valid; otherwise False
      */
-    function validLink($link) {
-        return filter_var(trim($link), FILTER_VALIDATE_URL);
-    }
-
-    /**
-     * Checks if the given experience value is expected on form, and returns true/false accordingly
-     * @param string $experienceValue The value being checked
-     * @return boolean True if the given experience value is expected on form; otherwise False
-     */
-    function validExperience($experienceValue)
-    {
-        return $experienceValue == "0-2"
-            || $experienceValue == "2-4"
-            || $experienceValue == "4+";
+    function validEmail($email) {
+        return filter_var(trim($email), FILTER_VALIDATE_EMAIL);
     }
 
     /**
@@ -50,11 +38,23 @@
     }
 
     /**
-     * Checks if the given email address is valid, and returns true/false accordingly
-     * @param string $email The email address being checked
-     * @return boolean True if the given email address is valid; otherwise False
+     * Checks if the given link is valid, and returns true/false accordingly
+     * @param string $link The link being checked
+     * @return boolean True if the given link is valid; otherwise False
      */
-    function validEmail($email) {
-        return filter_var(trim($email), FILTER_VALIDATE_EMAIL);
+    function validLink($link) {
+        return filter_var(trim($link), FILTER_VALIDATE_URL);
+    }
+
+    /**
+     * Checks if the given experience value is expected on form, and returns true/false accordingly
+     * @param string $experienceValue The value being checked
+     * @return boolean True if the given experience value is expected on form; otherwise False
+     */
+    function validExperience($experienceValue)
+    {
+        return $experienceValue == "0-2"
+            || $experienceValue == "2-4"
+            || $experienceValue == "4+";
     }
 ?>
