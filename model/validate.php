@@ -31,10 +31,22 @@
     }
 
     /**
-     * @return void
+     * Checks if the given phone number is valid, and returns true/false accordingly
+     * @param string $phone The phone number being checked
+     * @return boolean True if the given phone number is valid; otherwise False
      */
-    function validPhone() {
+    function validPhone($phone) {
+        // allows the following formats:
+        // 123 456 7890 or 123456 7890 or 123 4567890 or 1234567890
+        $withSpacesOptional = '/^(\d{3}\s?)(\d{3}\s?)(\d{4})$/';
 
+        // allows the following format: 123-456-7890
+        $withDashes = '/^(\d{3})-(\d{3})-(\d{4})$/';
+
+        // check and return whether given number follows
+        // at least one of the above defined formats
+        return preg_match($withSpacesOptional, $phone)
+            || preg_match($withDashes, $phone);
     }
 
     /**

@@ -34,7 +34,7 @@
     $f3->route("GET|POST /application-personal-info", function($f3) {
         // jf personal information was submitted
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // if the given first name if valid
+            // if the given first name is valid
             if(validName($_POST["first-name"])) {
                 // store it within session
                 $f3->set("SESSION.firstName", $_POST["first-name"]);
@@ -45,7 +45,7 @@
                 $f3->set("errors['firstName']", "must be one word containing only letters.");
             }
 
-            // if the given last name if valid
+            // if the given last name is valid
             if(validName($_POST["last-name"])) {
                 // store it within session
                 $f3->set("SESSION.lastName", $_POST["last-name"]);
@@ -56,14 +56,23 @@
                 $f3->set("errors['lastName']", "must be one word containing only letters.");
             }
 
+            // if the given phone number is valid
+            if(validPhone($_POST["phone"])) {
+                // store it within session
+                $f3->set("SESSION.phone", $_POST["phone"]);
+            }
+
+            // otherwise set error to be displayed
+            else {
+                $f3->set("errors['phone']", "must be made up of numbers, and may contain dashes.");
+            }
+
             $email = $_POST["email"];
             $state = $_POST["state"];
-            $phone = $_POST["phone"];
 
             // save data to session
             $f3->set("SESSION.email", $email);
             $f3->set("SESSION.state", $state);
-            $f3->set("SESSION.phone", $phone);
 
             // If there are no errors
             if (empty($f3->get('errors'))) {
