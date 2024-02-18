@@ -67,11 +67,20 @@
                 $f3->set("errors['phone']", "must be made up of numbers, and may contain dashes.");
             }
 
-            $email = $_POST["email"];
+            // if the given email address is valid
+            if(validEmail($_POST["email"])) {
+                // store it within session
+                $f3->set("SESSION.email", $_POST["email"]);
+            }
+
+            // otherwise set error to be displayed
+            else {
+                $f3->set("errors['email']", "must be a valid email address.");
+            }
+
             $state = $_POST["state"];
 
             // save data to session
-            $f3->set("SESSION.email", $email);
             $f3->set("SESSION.state", $state);
 
             // If there are no errors
@@ -115,7 +124,7 @@
 
             // otherwise, set error to be displayed
             else {
-                $f3->set("errors['yearsExperience']", "must be a valid value from below.");
+                $f3->set("errors['yearsExperience']", "must be an option from below.");
             }
 
             // grab the given data and save to session

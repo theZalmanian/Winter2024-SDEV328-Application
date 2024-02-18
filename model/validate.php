@@ -6,7 +6,7 @@
      */
     function validName($name) {
         // check and return whether the string contains only letters
-        return ctype_alpha($name);
+        return ctype_alpha(trim($name));
     }
 
     /**
@@ -15,7 +15,7 @@
      * @return boolean True if the given link is valid; otherwise False
      */
     function validLink($link) {
-        return filter_var($link, FILTER_VALIDATE_URL);
+        return filter_var(trim($link), FILTER_VALIDATE_URL);
     }
 
     /**
@@ -45,14 +45,16 @@
 
         // check and return whether given number follows
         // at least one of the above defined formats
-        return preg_match($withSpacesOptional, $phone)
-            || preg_match($withDashes, $phone);
+        return preg_match($withSpacesOptional, trim($phone))
+            || preg_match($withDashes, trim($phone));
     }
 
     /**
-     * @return void
+     * Checks if the given email address is valid, and returns true/false accordingly
+     * @param string $email The email address being checked
+     * @return boolean True if the given email address is valid; otherwise False
      */
-    function validEmail() {
-
+    function validEmail($email) {
+        return filter_var(trim($email), FILTER_VALIDATE_EMAIL);
     }
 ?>

@@ -68,7 +68,12 @@
                     <div class="col-12">
                         <label for="email">
                             <strong>Email</strong>
-                            <span class="required">*</span>
+                            <span class="required">
+                                <check if="{{ isset(@errors['email']) }}">
+                                    <true>{{ @errors['email'] }}</true>
+                                    <false>*</false>
+                                </check>
+                            </span>
                         </label>
                         <br>
                         <input class="form-control w-100" type="email" id="email" name="email"
