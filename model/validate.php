@@ -1,5 +1,44 @@
 <?php
     /**
+     * Gets and returns an associative array containing all required form fields, and their corresponding error messages
+     * @return string[] an associative array containing all required form fields, and their corresponding error messages
+     */
+    function getErrorMessages() {
+        return array(
+            "firstName" => "must be one word containing only letters.",
+            "lastName" => "must be one word containing only letters.",
+            "email" => "must be a valid email address.",
+            "phone" => "must be all numbers, may contain dashes."
+        );
+    }
+
+    /**
+     * Runs through $_POST, and checks if each field in $requiredFields is present, and has a value which is considered
+     * valid according to that field's corresponding validation method
+     * <br><br>
+     * If the field's value in $_POST is valid, it is saved to session under the same key. Otherwise, an error message
+     * corresponding to that field is set to be displayed on the current form
+     * @param Base $f3 A connection to the Fat Free Framework, used to store values in $_SESSION and set errors
+     * @param string[] $requiredFields An array containing the fields required on the current form, and their
+     * corresponding validation methods
+     */
+    function validateAllRequiredFields($f3, $requiredFields) {
+        // run through all fields that need validating
+        foreach ($requiredFields as $field => $validationMethod) {
+            // if the current field is valid
+            if($validationMethod( $_POST[$field] )) {
+                // store it within the session
+                $f3->set("SESSION.{$field}", $_POST[$field]);
+            }
+
+            // otherwise, set corresponding error to be displayed
+            else {
+                $f3->set("errors['" . $field . "']", getErrorMessages()[$field]);
+            }
+        }
+    }
+
+    /**
      * Checks if the given name is valid, and returns true/false accordingly
      * @param string $name The name being checked
      * @return boolean True if the given name is valid; otherwise False

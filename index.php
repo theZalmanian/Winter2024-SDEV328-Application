@@ -37,33 +37,15 @@
     $f3->route("GET|POST /application-personal-info", function($f3) {
         // jf personal information was submitted
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $requiredField = [
+            $requiredFields = [
                 "firstName" => "validName",
                 "lastName" => "validName",
                 "email" => "validEmail",
                 "phone" => "validPhone"
             ];
 
-            $errorMessages = [
-                "firstName" => "must be one word containing only letters.",
-                "lastName" => "must be one word containing only letters.",
-                "email" => "must be a valid email address.",
-                "phone" => "must be all numbers, may contain dashes."
-            ];
-
-            // run through all fields that need validating
-            foreach ($requiredField as $field => $validationMethod) {
-                // if the current field is valid
-                if($validationMethod( $_POST[$field] )) {
-                    // store it within the session
-                    $f3->set("SESSION.{$field}", $_POST[$field]);
-                }
-
-                // otherwise, set corresponding error to be displayed
-                else {
-                    $f3->set("errors['" . $field . "']", $errorMessages[$field]);
-                }
-            }
+            // validate all fields on personal info form
+            validateAllRequiredFields($f3, $requiredFields);
 
             // save state to session
             $f3->set("SESSION.state", $_POST["state"]);
