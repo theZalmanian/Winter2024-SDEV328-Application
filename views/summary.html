@@ -47,7 +47,7 @@
                 <hr>
                 <p>
                     Mailing Lists:
-                    <check if="{{ isset(@SESSION.mailingLists) }}">
+                    <check if="{{ !empty(@SESSION.mailingLists) }}">
                         <true>
                             <repeat group="{{ @SESSION.mailingLists }}" value="{{ @mailingList }}" counter="{{ @index }}">
                                 <check if="{{ @index < count(@SESSION.mailingLists) }}">
@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-    <check if="{{ isset(@SESSION.biography) }}">
+    <check if="{{ !empty(@SESSION.biography) }}">
         <div class="row">
             <div class="col-12 col-md-6 p-3 d-none d-md-block">
             </div>

@@ -25,53 +25,34 @@
                 <strong>Reality Architecture Jobs</strong>
             </p>
             <div class="row col-11">
-                <div class="d-none">{{ @index = 1 }}</div>
-                <repeat group="{{ getJobMailingLists() }}" key="{{ @value }}" value="{{ @name }}">
-                    <check if="{{ @index % 2 != 0}}">
-                        <div class="col-12 col-md-3">
-                    </check>
-                    <div>
-                        <input id="{{ @value }}" name="{{ @value }}"
-                               type="checkbox" value="{{ @name }}">
-                        <label for="{{ @value }}">{{ @name }}</label>
-                    </div>
-                    <check if="{{ @index % 2 == 0 }}">
+                <div class="col-12 col-md-3">
+                    <repeat group="{{ getJobMailingLists() }}" key="{{ @jobKey }}" value="{{ @value }}" counter="{{ @index }}">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="{{ @jobKey }}" name="{{ @jobKey }}" value="{{ @value }}">
+                            <label for="{{ @jobKey }}">{{ @value }}</label>
                         </div>
-                    </check>
-                    <div class="d-none">{{ @index++ }}</div>
-                </repeat>
+
+                        <check if="{{ @index % 2 == 0 }}">
+                            </div><div class="col-12 col-md-3">
+                        </check>
+                    </repeat>
+                </div>
             </div>
             <p class="my-2">
                 <strong>Relativistic Verticals</strong>
             </p>
             <div class="row col-11">
                 <div class="col-12 col-md-3">
-                    <input id="healthcare-simulations" name="healthcare-simulations"
-                           type="checkbox" value="Healthcare Simulations">
-                    <label for="healthcare-simulations">Healthcare Simulations</label>
-                    <br>
-                    <input id="neural-communications" name="neural-communications"
-                           type="checkbox" value="Neural Communications">
-                    <label for="neural-communications">Neural Communications</label>
-                </div>
-                <div class="col-12 col-md-3">
-                    <input id="perception-media" name="perception-media"
-                           type="checkbox" value="Perception Media">
-                    <label for="perception-media">Perception Media</label>
-                    <br>
-                    <input id="quantum-experiences" name="quantum-experiences"
-                           type="checkbox" value="Quantum Experiences">
-                    <label for="quantum-experiences">Quantum Experiences</label>
-                </div>
-                <div class="col-12 col-md-3">
-                    <input id="spacial-agriculture" name="spacial-agriculture"
-                           type="checkbox" value="Spacial Agriculture">
-                    <label for="spacial-agriculture">Spacial Agriculture</label>
-                </div>
-                <div class="col-12 col-md-3">
-                    <input id="tourism-interfaces" name="tourism-interfaces"
-                           type="checkbox" value="Tourism Interfaces">
-                    <label for="tourism-interfaces">Tourism Interfaces</label>
+                    <repeat group="{{ getVerticalMailingLists() }}" key="{{ @verticalKey }}" value="{{ @value }}" counter="{{ @index }}">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="{{ @verticalKey }}" name="{{ @verticalKey }}" value="{{ @value }}">
+                            <label for="{{ @verticalKey }}">{{ @value }}</label>
+                        </div>
+
+                        <check if="{{ @index % 2 == 0 }}">
+                            </div><div class="col-12 col-md-3">
+                        </check>
+                    </repeat>
                 </div>
             </div>
             <div class="d-flex justify-content-end mt-3">
