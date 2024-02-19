@@ -37,54 +37,36 @@
     $f3->route("GET|POST /application-personal-info", function($f3) {
         // jf personal information was submitted
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // if the given first name is valid
-            if(validName($_POST["first-name"])) {
-                // store it within session
-                $f3->set("SESSION.firstName", $_POST["first-name"]);
+            $requiredField = [
+                "firstName" => "validName",
+                "lastName" => "validName",
+                "email" => "validEmail",
+                "phone" => "validPhone"
+            ];
+
+            $errorMessages = [
+                "firstName" => "must be one word containing only letters.",
+                "lastName" => "must be one word containing only letters.",
+                "email" => "must be a valid email address.",
+                "phone" => "must be all numbers, may contain dashes."
+            ];
+
+            // run through all fields that need validating
+            foreach ($requiredField as $field => $validationMethod) {
+                // if the current field is valid
+                if($validationMethod( $_POST[$field] )) {
+                    // store it within the session
+                    $f3->set("SESSION.{$field}", $_POST[$field]);
+                }
+
+                // otherwise, set corresponding error to be displayed
+                else {
+                    $f3->set("errors['" . $field . "']", $errorMessages[$field]);
+                }
             }
 
-            // otherwise set error to be displayed
-            else {
-                $f3->set("errors['firstName']", "must be one word containing only letters.");
-            }
-
-            // if the given last name is valid
-            if(validName($_POST["last-name"])) {
-                // store it within session
-                $f3->set("SESSION.lastName", $_POST["last-name"]);
-            }
-
-            // otherwise set error to be displayed
-            else {
-                $f3->set("errors['lastName']", "must be one word containing only letters.");
-            }
-
-            // if the given phone number is valid
-            if(validPhone($_POST["phone"])) {
-                // store it within session
-                $f3->set("SESSION.phone", $_POST["phone"]);
-            }
-
-            // otherwise set error to be displayed
-            else {
-                $f3->set("errors['phone']", "must be made up of numbers, and may contain dashes.");
-            }
-
-            // if the given email address is valid
-            if(validEmail($_POST["email"])) {
-                // store it within session
-                $f3->set("SESSION.email", $_POST["email"]);
-            }
-
-            // otherwise set error to be displayed
-            else {
-                $f3->set("errors['email']", "must be a valid email address.");
-            }
-
-            $state = $_POST["state"];
-
-            // save data to session
-            $f3->set("SESSION.state", $state);
+            // save state to session
+            $f3->set("SESSION.state", $_POST["state"]);
 
             // If there are no errors
             if (empty($f3->get('errors'))) {
