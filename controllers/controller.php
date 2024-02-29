@@ -50,6 +50,17 @@
                 // save state to session
                 $this->_f3->set("SESSION.state", $_POST["state"]);
 
+                // if they opted into receiving job mailing lists
+                if($_POST["get-mailing-lists"]) {
+                    // note that in session
+                    $this->_f3->set("SESSION.getMailingLists", $_POST["get-mailing-lists"]);
+                }
+
+                // otherwise, note that in session
+                else {
+                    $this->_f3->set("SESSION.getMailingLists", "false");
+                }
+
                 // If there are no errors
                 if (empty($this->_f3->get('errors'))) {
                     // send user over to next application page
@@ -120,6 +131,18 @@
          */
         function applicationMailingLists()
         {
+            // create a new view object
+            $view = new Template();
+
+            // display mailing lists view
+            echo $view->render("views/mailing-lists.html");
+
+            // if the user did not opt into signing up for mailing lists
+            if($_SESSION["getMailingLists"] != "true") {
+                // send them off to the summary view
+                $this->_f3->reroute("application-summary");
+            }
+
             // jf prior experience was submitted
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // create storage array
@@ -134,15 +157,9 @@
                 // save data to session
                 $this->_f3->set("SESSION.mailingLists", $mailingLists);
 
-                // send user over to application summary page
+                // send them off to the summary view
                 $this->_f3->reroute("application-summary");
             }
-
-            // create a new view object
-            $view = new Template();
-
-            // display file at following path
-            echo $view->render("views/mailing-lists.html");
         }
 
         /**
@@ -152,7 +169,7 @@
             // create a new view object
             $view = new Template();
 
-            // display file at following path
+            // display application summary view
             echo $view->render("views/summary.html");
         }
     }
