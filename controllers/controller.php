@@ -45,7 +45,7 @@
                 ];
 
                 // validate all fields on personal info form
-                validateAllRequiredFields($this->_f3, $requiredFields);
+                Validation::validateAllRequiredFields($this->_f3, $requiredFields);
 
                 // save state to session
                 $this->_f3->set("SESSION.state", $_POST["state"]);
@@ -75,7 +75,7 @@
                 $portfolioLink = $_POST["portfolio-link"];
                 if(!empty($portfolioLink)) {
                     // if the given url vas valid
-                    if(validLink($portfolioLink)) {
+                    if(Validation::validLink($portfolioLink)) {
                         // store it within session
                         $this->_f3->set("SESSION.portfolioLink", $portfolioLink);
                     }
@@ -87,7 +87,7 @@
                 }
 
                 // if the given # of years experience was a valid radio value
-                if(validExperience($_POST["years-experience"])) {
+                if(Validation::validExperience($_POST["years-experience"])) {
                     // store it in session
                     $this->_f3->set("SESSION.yearsExperience", $_POST["years-experience"]);
                 }

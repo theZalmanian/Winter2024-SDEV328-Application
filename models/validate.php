@@ -30,14 +30,14 @@
             // run through all fields that need validating
             foreach ($requiredFields as $field => $validationMethod) {
                 // if the current field is valid
-                if($validationMethod( $_POST[$field] )) {
+                if(Validation::$validationMethod( $_POST[$field] )) {
                     // store it within the session
                     $f3->set("SESSION.{$field}", $_POST[$field]);
                 }
 
                 // otherwise, set corresponding error to be displayed
                 else {
-                    $f3->set("errors['" . $field . "']", getErrorMessages()[$field]);
+                    $f3->set("errors['" . $field . "']", Validation::getErrorMessages()[$field]);
                 }
             }
         }

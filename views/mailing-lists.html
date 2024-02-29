@@ -26,7 +26,7 @@
             </p>
             <div class="row col-11">
                 <div class="col-12 col-md-3">
-                    <repeat group="{{ getJobMailingLists() }}" key="{{ @jobKey }}" value="{{ @value }}" counter="{{ @index }}">
+                    <repeat group="{{ ProjectData::getJobMailingLists() }}" key="{{ @jobKey }}" value="{{ @value }}" counter="{{ @index }}">
                         <div class="checkbox-group">
                             <input type="checkbox" id="{{ @jobKey }}" name="{{ @jobKey }}" value="{{ @value }}">
                             <label for="{{ @jobKey }}">{{ @value }}</label>
@@ -43,7 +43,7 @@
             </p>
             <div class="row col-11">
                 <div class="col-12 col-md-3">
-                    <repeat group="{{ getVerticalMailingLists() }}" key="{{ @verticalKey }}" value="{{ @value }}" counter="{{ @index }}">
+                    <repeat group="{{ ProjectData::getVerticalMailingLists() }}" key="{{ @verticalKey }}" value="{{ @value }}" counter="{{ @index }}">
                         <div class="checkbox-group">
                             <input type="checkbox" id="{{ @verticalKey }}" name="{{ @verticalKey }}" value="{{ @value }}">
                             <label for="{{ @verticalKey }}">{{ @value }}</label>
