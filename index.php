@@ -13,12 +13,6 @@
     // require Fat-Free Framework autoload file
     require_once("vendor/autoload.php");
 
-    // access validation methods
-    require_once("models/validate.php");
-
-    // access business data
-    require_once("models/data.php");
-
     // instantiate Fat-Free Framework (f3) class and set up controller
     $f3 = Base::instance();
     $controller = new Controller($f3);
@@ -34,7 +28,7 @@
     // define routes for the application process
 
     // define a personal info route
-    $f3->route("GET|POST /application-personal-info", function($f3) {
+    $f3->route("GET|POST /application-personal-info", function() {
         global $controller;
 
         // process and display the application's personal info page
@@ -42,7 +36,7 @@
     });
 
     // define a prior experience route
-    $f3->route("GET|POST /application-experience", function($f3) {
+    $f3->route("GET|POST /application-experience", function() {
         global $controller;
 
         // process and display the application's experience page
@@ -50,7 +44,7 @@
     });
 
     // define a mailing list subscription route
-    $f3->route("GET|POST /application-mailing-lists", function($f3) {
+    $f3->route("GET|POST /application-mailing-lists", function() {
         global $controller;
 
         // process and display the application's mailing lists page
