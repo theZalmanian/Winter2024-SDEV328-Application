@@ -7,7 +7,7 @@
          * Gets and returns an associative array containing all required form fields, and their corresponding error messages
          * @return string[] an associative array containing all required form fields, and their corresponding error messages
          */
-        function getErrorMessages() {
+        static function getErrorMessages() {
             return array(
                 "firstName" => "must be one word containing only letters.",
                 "lastName" => "must be one word containing only letters.",
