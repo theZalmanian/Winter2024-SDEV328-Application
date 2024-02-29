@@ -53,7 +53,7 @@
                 // if they opted into receiving job mailing lists
                 if($_POST["get-mailing-lists"]) {
                     // note that in session
-                    $this->_f3->set("SESSION.getMailingLists", $_POST["get-mailing-lists"]);
+                    $this->_f3->set("SESSION.getMailingLists", "true");
                 }
 
                 // otherwise, note that in session

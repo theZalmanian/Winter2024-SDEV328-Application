@@ -44,23 +44,27 @@
                         <false>N/A</false>
                     </check>
                 </p>
-                <hr>
-                <p>
-                    Mailing Lists:
-                    <check if="{{ !empty(@SESSION.mailingLists) }}">
-                        <true>
-                            <repeat group="{{ @SESSION.mailingLists }}" value="{{ @mailingList }}" counter="{{ @index }}">
-                                <check if="{{ @index < count(@SESSION.mailingLists) }}">
-                                    <true>{{ @mailingList }},</true>
-                                    <false>{{ @mailingList }}</false>
-                                </check>
-                            </repeat>
-                        </true>
-                        <false>
-                            None Selected
-                        </false>
-                    </check>
-                </p>
+                <check if="{{ @SESSION.getMailingLists == 'true' }}">
+                    <true>
+                        <hr>
+                        <p>
+                            Mailing Lists:
+                            <check if="{{ !empty(@SESSION.mailingLists) }}">
+                                <true>
+                                    <repeat group="{{ @SESSION.mailingLists }}" value="{{ @mailingList }}" counter="{{ @index }}">
+                                        <check if="{{ @index < count(@SESSION.mailingLists) }}">
+                                            <true>{{ @mailingList }},</true>
+                                            <false>{{ @mailingList }}</false>
+                                        </check>
+                                    </repeat>
+                                </true>
+                                <false>
+                                    None Selected
+                                </false>
+                            </check>
+                        </p>
+                    </true>
+                </check>
             </div>
         </div>
         <div class="d-none d-md-block col-md-6 p-3">
