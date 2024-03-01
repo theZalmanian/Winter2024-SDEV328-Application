@@ -17,26 +17,22 @@
         }
 
         /**
-         * Runs through $_POST, and checks if each field in $requiredFields is present, and has a value which is considered
-         * valid according to that field's corresponding validation method
+         * Runs through POST, and checks if each field in $requiredFields contains a value which is valid according to
+         * it's corresponding validation method.
          * <br><br>
-         * If the field's value in $_POST is valid, it is saved to session under the same key. Otherwise, an error message
-         * corresponding to that field is set to be displayed on the current form
-         * @param Base $f3 A connection to the Fat Free Framework, used to store values in $_SESSION and set errors
-         * @param string[] $requiredFields An array containing the fields required on the current form, and their
-         * corresponding validation methods
+         * If the field is not considered valid, a corresponding error message is set to be displayed on the current form
+         * @param Base $f3 Connection to the Fat Free Framework, used to set errors if field invalid
+         * @param string[] $requiredFields Array of all fields required on form, and their corresponding validation methods
          */
         static function validateAllRequiredFields($f3, $requiredFields) {
-            // run through all fields that need validating
+            // run through all given fields
             foreach ($requiredFields as $field => $validationMethod) {
-                // if the current field is valid
-                if(Validation::$validationMethod( $_POST[$field] )) {
-                    // store it within the session
-                    $f3->set("SESSION.{$field}", $_POST[$field]);
-                }
+                // check if current field is valid using the given method name
+                $fieldValid = Validation::$validationMethod( $_POST[$field] );
 
-                // otherwise, set corresponding error to be displayed
-                else {
+                // if the field is not valid
+                if(!$fieldValid) {
+                    // set corresponding error to be displayed
                     $f3->set("errors['" . $field . "']", Validation::getErrorMessages()[$field]);
                 }
             }

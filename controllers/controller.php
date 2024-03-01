@@ -19,64 +19,51 @@
         }
 
         /**
-         * Routes to the Application's Home page
+         * Routes to the Application's Home view
          */
         function home()
         {
             // create a new view object
             $view = new Template();
 
-            // display file at following path
+            // display home view
             echo $view->render("views/home.html");
         }
 
         /**
-         * Routes to the Application: Personal Info page
+         * Routes to the Application: Personal Info view
          */
         function applicationPersonalInfo()
         {
             // jf personal information was submitted
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $requiredFields = [
-                    "firstName" => "validName",
-                    "lastName" => "validName",
-                    "email" => "validEmail",
-                    "phone" => "validPhone"
-                ];
-
                 // validate all fields on personal info form
-                Validation::validateAllRequiredFields($this->_f3, $requiredFields);
+                Validation::validateAllRequiredFields($this->_f3,
+                    [
+                        "firstName" => "validName",
+                        "lastName" => "validName",
+                        "email" => "validEmail",
+                        "phone" => "validPhone"
+                    ]
+                );
 
-                // If there are no errors
+                // If there are no errors/all fields are valid
                 if (empty($this->_f3->get('errors'))) {
-                    // if user opted into receiving job mailing lists
-                    if($_POST["get-mailing-lists"]) {
-                        // create applicant subscribed to lists object using given data
-                        $this->_f3->set("SESSION.currentApplicant",
-                            new Applicant_SubscribedToLists(
-                                $_POST["firstName"],
-                                $_POST["lastName"],
-                                $_POST["email"],
-                                $_POST["state"],
-                                $_POST["phone"]
-                            )
-                        );
-                    }
+                    // check if applicant opted into receiving mailing lists
+                    $applicantClass = ($_POST["get-mailing-lists"]) ? "Applicant_SubscribedToLists" : "Applicant";
 
-                    else {
-                        // otherwise create basic applicant object using given data
-                        $this->_f3->set("SESSION.currentApplicant",
-                            new Applicant(
-                                $_POST["firstName"],
-                                $_POST["lastName"],
-                                $_POST["email"],
-                                $_POST["state"],
-                                $_POST["phone"]
-                            )
-                        );
-                    }
+                    // create applicant using corresponding class and submitted data
+                    $this->_f3->set("SESSION.currentApplicant",
+                        new $applicantClass(
+                            $_POST["firstName"],
+                            $_POST["lastName"],
+                            $_POST["email"],
+                            $_POST["state"],
+                            $_POST["phone"]
+                        )
+                    );
 
-                    // send user over to next application page
+                    // send applicant over to next application page
                     $this->_f3->reroute("application-experience");
                 }
             }
@@ -84,7 +71,7 @@
             // create a new view object
             $view = new Template();
 
-            // display file at following path
+            // display personal info view
             echo $view->render("views/personal-info.html");
         }
 
