@@ -1,4 +1,7 @@
 <?php
+    /**
+     * Represents a Job Applicant, contains all data submitted throughout application
+     */
     class Applicant
     {
         /**

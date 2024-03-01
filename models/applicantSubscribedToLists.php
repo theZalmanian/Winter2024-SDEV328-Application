@@ -1,4 +1,7 @@
 <?php
+    /**
+     * Represents a standard Applicant that has opted into some mailing lists
+     */
     class Applicant_SubscribedToLists extends Applicant
     {
         /**

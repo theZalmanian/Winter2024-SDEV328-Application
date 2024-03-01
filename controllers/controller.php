@@ -47,22 +47,35 @@
                 // validate all fields on personal info form
                 Validation::validateAllRequiredFields($this->_f3, $requiredFields);
 
-                // save state to session
-                $this->_f3->set("SESSION.state", $_POST["state"]);
-
-                // if they opted into receiving job mailing lists
-                if($_POST["get-mailing-lists"]) {
-                    // note that in session
-                    $this->_f3->set("SESSION.getMailingLists", "true");
-                }
-
-                // otherwise, note that in session
-                else {
-                    $this->_f3->set("SESSION.getMailingLists", "false");
-                }
-
                 // If there are no errors
                 if (empty($this->_f3->get('errors'))) {
+                    // if user opted into receiving job mailing lists
+                    if($_POST["get-mailing-lists"]) {
+                        // create applicant subscribed to lists object using given data
+                        $this->_f3->set("SESSION.currentApplicant",
+                            new Applicant_SubscribedToLists(
+                                $_POST["firstName"],
+                                $_POST["lastName"],
+                                $_POST["email"],
+                                $_POST["state"],
+                                $_POST["phone"]
+                            )
+                        );
+                    }
+
+                    else {
+                        // otherwise create basic applicant object using given data
+                        $this->_f3->set("SESSION.currentApplicant",
+                            new Applicant(
+                                $_POST["firstName"],
+                                $_POST["lastName"],
+                                $_POST["email"],
+                                $_POST["state"],
+                                $_POST["phone"]
+                            )
+                        );
+                    }
+
                     // send user over to next application page
                     $this->_f3->reroute("application-experience");
                 }
@@ -124,6 +137,10 @@
 
             // display file at following path
             echo $view->render("views/experience.html");
+
+            echo "<pre>";
+            var_dump($_SESSION);
+            echo "</pre>";
         }
 
         /**
