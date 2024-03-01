@@ -12,7 +12,9 @@
                 "firstName" => "must be one word containing only letters.",
                 "lastName" => "must be one word containing only letters.",
                 "email" => "must be a valid email address.",
-                "phone" => "must be all numbers, may contain dashes."
+                "phone" => "must be all numbers, may contain dashes.",
+                "portfolioLink" => "must be a valid url.",
+                "yearsExperience" => "must be an option from below."
             );
         }
 
@@ -82,7 +84,14 @@
          * @return boolean True if the given link is valid; otherwise False
          */
         static function validLink($link) {
-            return filter_var(trim($link), FILTER_VALIDATE_URL);
+            // if a link was given to validate
+            if(!empty($link)) {
+                // check if it is a valid url
+                return filter_var(trim($link), FILTER_VALIDATE_URL);
+            }
+
+            // if no link was given, it is not a required field
+            return true;
         }
 
         /**

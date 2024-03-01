@@ -37,7 +37,7 @@
         {
             // jf personal information was submitted
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // validate all fields on personal info form
+                // validate all required fields on personal info form
                 Validation::validateAllRequiredFields($this->_f3,
                     [
                         "firstName" => "validName",
@@ -50,9 +50,9 @@
                 // If there are no errors/all fields are valid
                 if (empty($this->_f3->get('errors'))) {
                     // check if applicant opted into receiving mailing lists
-                    $applicantClass = ($_POST["get-mailing-lists"]) ? "Applicant_SubscribedToLists" : "Applicant";
+                    $applicantClass = $_POST["get-mailing-lists"] ? "Applicant_SubscribedToLists" : "Applicant";
 
-                    // create applicant using corresponding class and submitted data
+                    // create applicant using corresponding class and submitted data, and store in session
                     $this->_f3->set("SESSION.currentApplicant",
                         new $applicantClass(
                             $_POST["firstName"],
@@ -82,38 +82,29 @@
         {
             // jf prior experience was submitted
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // if a portfolio was submitted
-                $portfolioLink = $_POST["portfolio-link"];
-                if(!empty($portfolioLink)) {
-                    // if the given url vas valid
-                    if(Validation::validLink($portfolioLink)) {
-                        // store it within session
-                        $this->_f3->set("SESSION.portfolioLink", $portfolioLink);
-                    }
-
-                    // otherwise set error to be displayed
-                    else {
-                        $this->_f3->set("errors['portfolioLink']", "must be a valid url.");
-                    }
-                }
-
-                // if the given # of years experience was a valid radio value
-                if(Validation::validExperience($_POST["years-experience"])) {
-                    // store it in session
-                    $this->_f3->set("SESSION.yearsExperience", $_POST["years-experience"]);
-                }
-
-                // otherwise, set error to be displayed
-                else {
-                    $this->_f3->set("errors['yearsExperience']", "must be an option from below.");
-                }
-
-                // grab the given data and save to session
-                $this->_f3->set("SESSION.biography", $_POST["biography"]);
-                $this->_f3->set("SESSION.willingToRelocate", $_POST["willing-to-relocate"]);
+                // validate all required fields on prior experience form
+                Validation::validateAllRequiredFields($this->_f3,
+                    [
+                        "portfolioLink" => "validLink",
+                        "yearsExperience" => "validExperience",
+                    ]
+                );
 
                 // If there are no errors
                 if (empty($this->_f3->get('errors'))) {
+                    // update application object in session w/ the latest submission data
+                    $this->_f3->get("SESSION.currentApplicant")->setBiography($_POST["biography"]);
+
+                    if(!empty($_POST["portfolioLink"])) {
+                        $this->_f3->get("SESSION.currentApplicant")->setPortfolioLink($_POST["portfolioLink"]);
+                    }
+
+                    $this->_f3->get("SESSION.currentApplicant")->setYearsExperience($_POST["yearsExperience"]);
+
+                    if(!empty($_POST["willingToRelocate"])) {
+                        $this->_f3->get("SESSION.currentApplicant")->setWillingToRelocate($_POST["willingToRelocate"]);
+                    }
+
                     // send user over to next application page
                     $this->_f3->reroute("application-mailing-lists");
                 }
@@ -122,12 +113,8 @@
             // create a new view object
             $view = new Template();
 
-            // display file at following path
+            // display prior experience view
             echo $view->render("views/experience.html");
-
-            echo "<pre>";
-            var_dump($_SESSION);
-            echo "</pre>";
         }
 
         /**
@@ -175,6 +162,10 @@
 
             // display application summary view
             echo $view->render("views/summary.html");
+
+            echo "<pre>";
+            var_dump($_SESSION);
+            echo "</pre>";
         }
     }
 ?>
