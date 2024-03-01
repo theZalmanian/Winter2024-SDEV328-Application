@@ -86,7 +86,7 @@
                 Validation::validateAllRequiredFields($this->_f3,
                     [
                         "portfolioLink" => "validLink",
-                        "yearsExperience" => "validExperience",
+                        "yearsExperience" => "validExperience"
                     ]
                 );
 
@@ -94,16 +94,9 @@
                 if (empty($this->_f3->get('errors'))) {
                     // update application object in session w/ the latest submission data
                     $this->_f3->get("SESSION.currentApplicant")->setBiography($_POST["biography"]);
-
-                    if(!empty($_POST["portfolioLink"])) {
-                        $this->_f3->get("SESSION.currentApplicant")->setPortfolioLink($_POST["portfolioLink"]);
-                    }
-
+                    $this->_f3->get("SESSION.currentApplicant")->setPortfolioLink(!empty($_POST["portfolioLink"]) ? $_POST["portfolioLink"] : "N/A");
                     $this->_f3->get("SESSION.currentApplicant")->setYearsExperience($_POST["yearsExperience"]);
-
-                    if(!empty($_POST["willingToRelocate"])) {
-                        $this->_f3->get("SESSION.currentApplicant")->setWillingToRelocate($_POST["willingToRelocate"]);
-                    }
+                    $this->_f3->get("SESSION.currentApplicant")->setWillingToRelocate(!empty($_POST["willingToRelocate"]) ? $_POST["willingToRelocate"] : "N/A");
 
                     // send user over to next application page
                     $this->_f3->reroute("application-mailing-lists");
