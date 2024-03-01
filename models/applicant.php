@@ -54,7 +54,7 @@
          * @param string $state U.S. state applicant resides in
          * @param string $phone Applicant's phone number
          */
-        function __construct($firstName, $lastName, $email, $state, $phone)
+        function __construct(string $firstName, string $lastName, string $email, string $state, string $phone)
         {
             // populate all given values
             $this->_firstName = $firstName;
