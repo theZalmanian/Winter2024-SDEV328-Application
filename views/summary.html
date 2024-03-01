@@ -19,32 +19,27 @@
     <div class="row d-flex align-items-center">
         <div class="col-md-6">
             <div class="border border p-3" id="summary-data">
-                <p>Name: {{ @SESSION.firstName }} {{ @SESSION.lastName }}</p>
+                <p>Name: {{ @SESSION.currentApplicant->getFirstName() }} {{ @SESSION.currentApplicant->getLastName() }}</p>
                 <hr>
-                <p>Email: {{ @SESSION.email }}</p>
+
+                <p>Email: {{ @SESSION.currentApplicant->getEmail() }}</p>
                 <hr>
-                <p>State: {{ @SESSION.state }}</p>
+
+                <p>State: {{ @SESSION.currentApplicant->getState() }}</p>
                 <hr>
-                <p>Phone: {{ @SESSION.phone }}</p>
+
+                <p>Phone: {{ @SESSION.currentApplicant->getPhone() }}</p>
                 <hr>
-                <p>
-                    Portfolio Link:
-                    <check if="{{ isset(@SESSION.portfolioLink) }}">
-                        <true>{{ @SESSION.portfolioLink }}</true>
-                        <false>N/A</false>
-                    </check>
-                </p>
+
+                <p>Portfolio Link: {{ @SESSION.currentApplicant->getPortfolioLink() }}</p>
                 <hr>
-                <p>Experience: {{ @SESSION.yearsExperience }} years</p>
+
+                <p>Experience: {{ @SESSION.currentApplicant->getYearsExperience() }} years</p>
                 <hr>
-                <p>
-                    Willing To Relocate:
-                    <check if="{{ isset(@SESSION.willingToRelocate) }}">
-                        <true>{{ @SESSION.willingToRelocate }}</true>
-                        <false>N/A</false>
-                    </check>
-                </p>
-                <check if="{{ @SESSION.getMailingLists == 'true' }}">
+
+                <p>Willing To Relocate: {{ @SESSION.currentApplicant->isWillingToRelocate() }}</p>
+
+                <check if="{{ @SESSION.currentApplicant instanceof Applicant_SubscribedToLists }}">
                     <true>
                         <hr>
                         <p>

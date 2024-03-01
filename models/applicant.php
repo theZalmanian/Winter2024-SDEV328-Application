@@ -40,7 +40,7 @@
         private $_yearsExperience;
 
         /**
-         * @var boolean Whether applicant is willing to relocate for position (true/false)
+         * @var string Whether applicant is willing to relocate for position (yes/no/maybe)
          */
         private $_willingToRelocate;
 
@@ -194,19 +194,19 @@
         }
 
         /**
-         * Gets and returns whether applicant is willing to relocate for position (true/false)
-         * @return bool whether applicant is willing to relocate for position (true/false)
+         * Gets and returns whether applicant is willing to relocate for position (yes/no/maybe)
+         * @return string whether applicant is willing to relocate for position (yes/no/maybe)
          */
-        public function isWillingToRelocate(): bool
+        public function isWillingToRelocate(): string
         {
             return $this->_willingToRelocate;
         }
 
         /**
-         * Sets whether applicant is willing to relocate for position (true/false) to given value
-         * @param bool $willingToRelocate whether applicant is willing to relocate for position (true/false)
+         * Sets whether applicant is willing to relocate for position to given value (yes/no/maybe)
+         * @param string $willingToRelocate whether applicant is willing to relocate for position (yes/no/maybe)
          */
-        public function setWillingToRelocate(bool $willingToRelocate)
+        public function setWillingToRelocate(string $willingToRelocate)
         {
             $this->_willingToRelocate = $willingToRelocate;
         }
