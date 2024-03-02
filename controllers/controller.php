@@ -1,5 +1,10 @@
 <?php
     /**
+     * The key used to access the current applicant object in $_SESSION
+     */
+    define("SESSION_APPLICANT_KEY", "SESSION.currentApplicant");
+
+    /**
      * Main controller for Application project
      */
     class Controller
@@ -53,7 +58,7 @@
                     $applicantClass = $_POST["get-mailing-lists"] ? "Applicant_SubscribedToLists" : "Applicant";
 
                     // create applicant using corresponding class and submitted data, and store in session
-                    $this->_f3->set("SESSION.currentApplicant",
+                    $this->_f3->set(SESSION_APPLICANT_KEY,
                         new $applicantClass(
                             $_POST["firstName"],
                             $_POST["lastName"],
@@ -93,7 +98,7 @@
                 // If there are no errors
                 if (empty($this->_f3->get('errors'))) {
                     // get the current applicant from session
-                    $currentApplicant = $this->_f3->get("SESSION.currentApplicant");
+                    $currentApplicant = $this->_f3->get(SESSION_APPLICANT_KEY);
 
                     // update the applicant w/ latest submission data
                     $currentApplicant->setBiography($_POST["biography"]);
@@ -102,10 +107,10 @@
                     $currentApplicant->setWillingToRelocate(!empty($_POST["willingToRelocate"]) ? $_POST["willingToRelocate"] : "N/A");
 
                     // replace applicant in session w/ now updated version
-                    $this->_f3->set("SESSION.currentApplicant", $currentApplicant);
+                    $this->_f3->set(SESSION_APPLICANT_KEY, $currentApplicant);
 
                     // if the current applicant opted into subscribing for mailing lists
-                    if($this->_f3->get("SESSION.currentApplicant") instanceof Applicant_SubscribedToLists) {
+                    if($this->_f3->get(SESSION_APPLICANT_KEY) instanceof Applicant_SubscribedToLists) {
                         // send user over to next application page
                         $this->_f3->reroute("application-mailing-lists");
                     }
@@ -136,21 +141,21 @@
                 // run through all selected checkboxes in post
                 foreach ($_POST as $currCheckbox => $value) {
                     // if the current checkbox is a job mailing list
-                    if (array_key_exists($currCheckbox, ProjectData::getJobMailingLists())) {
+                    if ( array_key_exists($currCheckbox, ProjectData::getJobMailingLists()) ) {
                         // add its value to the corresponding array
                         $jobMailingLists[] = $value;
                     }
 
                     // if the current checkbox is a vertical mailing list
-                    else if (array_key_exists($currCheckbox, ProjectData::getVerticalMailingLists())) {
+                    else if ( array_key_exists($currCheckbox, ProjectData::getVerticalMailingLists()) ) {
                         // add its value to the corresponding array
                         $verticalMailingLists[] = $value;
                     }
                 }
 
                 // update the applicant object w/ the subscribed mailing lists
-                $this->_f3->get("SESSION.currentApplicant")->setSelectedJobLists($jobMailingLists);
-                $this->_f3->get("SESSION.currentApplicant")->setSelectedVerticalLists($verticalMailingLists);
+                $this->_f3->get(SESSION_APPLICANT_KEY)->setSelectedJobLists($jobMailingLists);
+                $this->_f3->get(SESSION_APPLICANT_KEY)->setSelectedVerticalLists($verticalMailingLists);
 
                 // send applicant over to the summary view
                 $this->_f3->reroute("application-summary");
