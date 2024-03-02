@@ -20,37 +20,44 @@
         <div class="col-md-6">
             <div class="border border p-3" id="summary-data">
                 <p>
-                    <strong>Name:</strong> {{ @SESSION.currentApplicant->getFirstName() }} {{ @SESSION.currentApplicant->getLastName() }}
+                    <strong>Name:</strong>
+                    {{ @SESSION.currentApplicant->getFirstName() }} {{ @SESSION.currentApplicant->getLastName() }}
                 </p>
                 <hr>
 
                 <p>
-                    <strong>Email:</strong> {{ @SESSION.currentApplicant->getEmail() }}
+                    <strong>Email:</strong>
+                    {{ @SESSION.currentApplicant->getEmail() }}
                 </p>
                 <hr>
 
                 <p>
-                    <strong>State:</strong> {{ @SESSION.currentApplicant->getState() }}
+                    <strong>State:</strong>
+                    {{ @SESSION.currentApplicant->getState() }}
                 </p>
                 <hr>
 
                 <p>
-                    <strong>Phone:</strong> {{ @SESSION.currentApplicant->getPhone() }}
+                    <strong>Phone:</strong>
+                    {{ @SESSION.currentApplicant->getPhone() }}
                 </p>
                 <hr>
 
                 <p>
-                    <strong>Portfolio Link:</strong> {{ @SESSION.currentApplicant->getPortfolioLink() }}
+                    <strong>Portfolio Link:</strong>
+                    {{ @SESSION.currentApplicant->getPortfolioLink() }}
                 </p>
                 <hr>
 
                 <p>
-                    <strong>Experience:</strong> {{ @SESSION.currentApplicant->getYearsExperience() }} years
+                    <strong>Experience:</strong>
+                    {{ @SESSION.currentApplicant->getYearsExperience() }} years
                 </p>
                 <hr>
 
                 <p>
-                    <strong>Willing to Relocate:</strong> {{ @SESSION.currentApplicant->isWillingToRelocate() }}
+                    <strong>Willing to Relocate:</strong>
+                    {{ @SESSION.currentApplicant->isWillingToRelocate() }}
                 </p>
 
                 <check if="{{ @SESSION.currentApplicant instanceof Applicant_SubscribedToLists }}">
@@ -60,12 +67,7 @@
                             <check if="{{ !empty( @SESSION.currentApplicant->getSelectedJobLists() ) }}">
                                 <true>
                                     <strong>Reality Architecture Jobs:</strong>
-                                    <repeat group="{{ @SESSION.currentApplicant->getSelectedJobLists() }}" value="{{ @mailingList }}" counter="{{ @index }}">
-                                        <check if="{{ @index < count(@SESSION.currentApplicant->getSelectedJobLists()) }}">
-                                            <true>{{ @mailingList }},</true>
-                                            <false>{{ @mailingList }}</false>
-                                        </check>
-                                    </repeat>
+                                    {{ implode(', ', @SESSION.currentApplicant->getSelectedJobLists()) }}
                                 </true>
                             </check>
                             <check if="{{ !empty( @SESSION.currentApplicant->getSelectedVerticalLists() ) }}">
@@ -76,15 +78,11 @@
                                         </true>
                                     </check>
                                     <strong>Relativistic Verticals:</strong>
-                                    <repeat group="{{ @SESSION.currentApplicant->getSelectedVerticalLists() }}" value="{{ @mailingList }}" counter="{{ @index }}">
-                                        <check if="{{ @index < count(@SESSION.currentApplicant->getSelectedVerticalLists()) }}">
-                                            <true>{{ @mailingList }},</true>
-                                            <false>{{ @mailingList }}</false>
-                                        </check>
-                                    </repeat>
+                                    {{ implode(', ', @SESSION.currentApplicant->getSelectedVerticalLists()) }}
                                 </true>
                             </check>
-                            <check if="{{ empty( @SESSION.currentApplicant->getSelectedVerticalLists() ) && empty( @SESSION.currentApplicant->getSelectedJobLists() ) }}">
+                            <check if="{{ empty( @SESSION.currentApplicant->getSelectedVerticalLists() )
+                                          && empty( @SESSION.currentApplicant->getSelectedJobLists() ) }}">
                                 <true>Mailing Lists: None Selected</true>
                             </check>
                         </p>
@@ -118,14 +116,14 @@
             </div>
         </div>
     </div>
-    <check if="{{ !empty(@SESSION.biography) }}">
+    <check if="{{ !empty(@SESSION.currentApplicant->getBiography()) }}">
         <div class="row">
             <div class="col-12 col-md-6 p-3 d-none d-md-block">
             </div>
             <div class="col-12 col-md-6 p-3" id="applicant-bio">
                 <h4>Summary</h4>
                 <p>
-                    {{ @SESSION.biography }}
+                    {{ @SESSION.currentApplicant->getBiography() }}
                 </p>
             </div>
         </div>
