@@ -43,19 +43,35 @@
                     <true>
                         <hr>
                         <p>
-                            Mailing Lists:
-                            <check if="{{ !empty(@SESSION.mailingLists) }}">
+                            <check if="{{ !empty( @SESSION.currentApplicant->getSelectedJobLists() ) }}">
                                 <true>
-                                    <repeat group="{{ @SESSION.mailingLists }}" value="{{ @mailingList }}" counter="{{ @index }}">
-                                        <check if="{{ @index < count(@SESSION.mailingLists) }}">
+                                    Reality Architecture Jobs:
+                                    <repeat group="{{ @SESSION.currentApplicant->getSelectedJobLists() }}" value="{{ @mailingList }}" counter="{{ @index }}">
+                                        <check if="{{ @index < count(@SESSION.currentApplicant->getSelectedJobLists()) }}">
                                             <true>{{ @mailingList }},</true>
                                             <false>{{ @mailingList }}</false>
                                         </check>
                                     </repeat>
                                 </true>
-                                <false>
-                                    None Selected
-                                </false>
+                            </check>
+                            <check if="{{ !empty( @SESSION.currentApplicant->getSelectedVerticalLists() ) }}">
+                                <true>
+                                    <check if="{{ !empty( @SESSION.currentApplicant->getSelectedJobLists() ) }}">
+                                        <true>
+                                            <br>
+                                        </true>
+                                    </check>
+                                    Relativistic Verticals:
+                                    <repeat group="{{ @SESSION.currentApplicant->getSelectedVerticalLists() }}" value="{{ @mailingList }}" counter="{{ @index }}">
+                                        <check if="{{ @index < count(@SESSION.currentApplicant->getSelectedVerticalLists()) }}">
+                                            <true>{{ @mailingList }},</true>
+                                            <false>{{ @mailingList }}</false>
+                                        </check>
+                                    </repeat>
+                                </true>
+                            </check>
+                            <check if="{{ empty( @SESSION.currentApplicant->getSelectedVerticalLists() ) && empty( @SESSION.currentApplicant->getSelectedJobLists() ) }}">
+                                <true>Mailing Lists: None Selected</true>
                             </check>
                         </p>
                     </true>

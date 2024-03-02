@@ -92,14 +92,26 @@
 
                 // If there are no errors
                 if (empty($this->_f3->get('errors'))) {
-                    // update application object in session w/ the latest submission data
-                    $this->_f3->get("SESSION.currentApplicant")->setBiography($_POST["biography"]);
-                    $this->_f3->get("SESSION.currentApplicant")->setPortfolioLink(!empty($_POST["portfolioLink"]) ? $_POST["portfolioLink"] : "N/A");
-                    $this->_f3->get("SESSION.currentApplicant")->setYearsExperience($_POST["yearsExperience"]);
-                    $this->_f3->get("SESSION.currentApplicant")->setWillingToRelocate(!empty($_POST["willingToRelocate"]) ? $_POST["willingToRelocate"] : "N/A");
+                    // get the current applicant from session
+                    $currentApplicant = $this->_f3->get("SESSION.currentApplicant");
 
-                    // send user over to next application page
-                    $this->_f3->reroute("application-mailing-lists");
+                    // update the applicant w/ latest submission data
+                    $currentApplicant->setBiography($_POST["biography"]);
+                    $currentApplicant->setPortfolioLink(!empty($_POST["portfolioLink"]) ? $_POST["portfolioLink"] : "N/A");
+                    $currentApplicant->setYearsExperience($_POST["yearsExperience"]);
+                    $currentApplicant->setWillingToRelocate(!empty($_POST["willingToRelocate"]) ? $_POST["willingToRelocate"] : "N/A");
+
+                    // replace applicant in session w/ now updated version
+                    $this->_f3->set("SESSION.currentApplicant", $currentApplicant);
+
+                    // if the current applicant opted into subscribing for mailing lists
+                    if($this->_f3->get("SESSION.currentApplicant") instanceof Applicant_SubscribedToLists) {
+                        // send user over to next application page
+                        $this->_f3->reroute("application-mailing-lists");
+                    }
+
+                    // otherwise, send them to the summary view
+                    $this->_f3->reroute("application-summary");
                 }
             }
 
@@ -115,35 +127,40 @@
          */
         function applicationMailingLists()
         {
+            // jf mailing lists were selected
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // create array to store each type of mailing list
+                $jobMailingLists = [];
+                $verticalMailingLists = [];
+
+                // run through all selected checkboxes in post
+                foreach ($_POST as $currCheckbox => $value) {
+                    // if the current checkbox is a job mailing list
+                    if (array_key_exists($currCheckbox, ProjectData::getJobMailingLists())) {
+                        // add its value to the corresponding array
+                        $jobMailingLists[] = $value;
+                    }
+
+                    // if the current checkbox is a vertical mailing list
+                    else if (array_key_exists($currCheckbox, ProjectData::getVerticalMailingLists())) {
+                        // add its value to the corresponding array
+                        $verticalMailingLists[] = $value;
+                    }
+                }
+
+                // update the applicant object w/ the subscribed mailing lists
+                $this->_f3->get("SESSION.currentApplicant")->setSelectedJobLists($jobMailingLists);
+                $this->_f3->get("SESSION.currentApplicant")->setSelectedVerticalLists($verticalMailingLists);
+
+                // send applicant over to the summary view
+                $this->_f3->reroute("application-summary");
+            }
+
             // create a new view object
             $view = new Template();
 
             // display mailing lists view
             echo $view->render("views/mailing-lists.html");
-
-            // if the user did not opt into signing up for mailing lists
-            if($_SESSION["getMailingLists"] != "true") {
-                // send them off to the summary view
-                $this->_f3->reroute("application-summary");
-            }
-
-            // jf prior experience was submitted
-            if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // create storage array
-                $mailingLists = [];
-
-                // run through the post array
-                foreach ($_POST as $currCheckbox) {
-                    // add the current checkbox to storage array
-                    $mailingLists[] = $currCheckbox;
-                }
-
-                // save data to session
-                $this->_f3->set("SESSION.mailingLists", $mailingLists);
-
-                // send them off to the summary view
-                $this->_f3->reroute("application-summary");
-            }
         }
 
         /**
@@ -155,10 +172,6 @@
 
             // display application summary view
             echo $view->render("views/summary.html");
-
-            echo "<pre>";
-            var_dump($_SESSION);
-            echo "</pre>";
         }
     }
 ?>
